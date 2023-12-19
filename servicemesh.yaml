@@ -15,12 +15,12 @@ spec:
       number: 9094
       protocol: HTTP2
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   annotations:
   name: strimzi-kafka-gw-bootstrap
-  namespace: strimzi
+  namespace: kafka
 spec:
   selector:
     istio: ingressgateway
@@ -56,12 +56,12 @@ spec:
         port:
           number: 9092
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   annotations:
   name: strimzi-kafka-vs-bootstrap
-  namespace: strimzi
+  namespace: kafka
 spec:
   gateways:
     - strimzi-kafka-gw-bootstrap
@@ -75,4 +75,32 @@ spec:
             host: my-cluster-kafka-bootstrap
             port:
               number: 9092
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  selector:
+    matchLabels:
+      app: conslsumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+        - name: consumer
+          image: charroux/kafka-consumer
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TOPIC
+              value: my-topic
+            - name: KAFKA_URL
+              value: my-cluster-kafka-bootstrap
 
