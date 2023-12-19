@@ -1,5 +1,5 @@
 # strimzi
-
+## Start the minikube Kubernetes cluster 
 ```
 minikube start --cpus=2 --memory=5000 --driver=docker
 ```
@@ -7,7 +7,7 @@ minikube start --cpus=2 --memory=5000 --driver=docker
 ```
 kubectl label namespace kafka istio-injection=enabled
 ```
-
+## Create a kafka namespace in the cluster
 ```
 kubectl create namespace kafka        
 ```
