@@ -12,6 +12,19 @@ kubectl label namespace kafka istio-injection=enabled
 kubectl create namespace kafka        
 ```
 
+## Get and delete existing deployments
+```
+kubectl delete deployment --all --namespace=kafka     
+```
+
+## Get and delete existing services
+```
+kubectl delete service --all --namespace=kafka     
+```
+## Get and delete existing pods
+```
+kubectl delete pod --all --namespace=kafka     
+```
 
 ## Apply the Strimzi install files
 ```
@@ -39,12 +52,30 @@ Wait while Kubernetes starts the required pods, services, and so on:
 ```
 kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka
 ```
-
+Launch again until not ready
 ```
 kubectl apply -f servicemesh.yaml     
 ```
 
 ## Send and receive messages
+```
+docker build -t producer .
+```
+```
+docker tag imageID charroux/producer:1
+```
+```
+docker push efrei/producer:1
+```
+```
+kubectl apply -f producer.yml
+```
+```
+kubectl get pods -n kafka
+```
+```
+kubectl logs producerId -n kafka
+```
 With the cluster running, run a simple producer to send messages to a Kafka topic (the topic is automatically created):
 ```
 kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:0.38.0-kafka-3.6.0 --rm=true --restart=Never -- bin/kafka-console-producer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --topic my-topic

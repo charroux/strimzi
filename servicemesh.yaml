@@ -76,31 +76,31 @@ spec:
             port:
               number: 9092
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: consumer
-spec:
-  selector:
-    matchLabels:
-      app: conslsumer
-  template:
-    metadata:
-      labels:
-        app: consumer
-    spec:
-      containers:
-        - name: consumer
-          image: charroux/kafka-consumer
-          resources:
-            requests:
-              memory: 200Mi
-              cpu: 100m
-          ports:
-            - containerPort: 8080
-          env:
-            - name: TOPIC
-              value: my-topic
-            - name: KAFKA_URL
-              value: my-cluster-kafka-bootstrap
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: consumer
+#spec:
+#  selector:
+#    matchLabels:
+#      app: conslsumer
+#  template:
+#    metadata:
+#      labels:
+#        app: consumer
+#    spec:
+#      containers:
+#        - name: consumer
+#          image: charroux/kafka-consumer
+#          resources:
+#            requests:
+#              memory: 200Mi
+#              cpu: 100m
+#          ports:
+#            - containerPort: 8080
+#          env:
+#            - name: TOPIC
+#              value: my-topic
+#            - name: KAFKA_URL
+#              value: my-cluster-kafka-bootstrap
 
