@@ -34,7 +34,8 @@ public class KafkaConfig {
         props.put(DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         props.put(DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 
-        logger.info("Configuration");
+        logger.info("-------------------------------\n\nConfig\n\n------------------");
+
 
         return new KafkaStreamsConfiguration(props);
     }

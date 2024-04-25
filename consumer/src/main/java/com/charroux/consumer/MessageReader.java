@@ -22,6 +22,8 @@ public class MessageReader {
         KStream<String, String> messageStream = streamsBuilder
                 .stream("my-topic", Consumed.with(STRING_SERDE, STRING_SERDE));
 
+        logger.info("-------------------------------\n\nStream\n\n------------------");
+
         KTable<String, Long> wordCounts = messageStream
                 .mapValues((ValueMapper<String, String>) String::toLowerCase)
                 .flatMapValues(value -> Arrays.asList(value.split("\\W+")))
@@ -29,7 +31,8 @@ public class MessageReader {
                 .count();
 
         String n = wordCounts.toStream().toString();
-        logger.info("Received: " + n);
+        logger.info("-------------------------------\n\nWorld count\n\n------------------" + n);
+
     }
 
 }

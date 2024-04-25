@@ -71,6 +71,9 @@ docker build -t charroux/consumer:1 .
 docker push charroux/consumer:1
 ```
 ```
+kubectl apply -f consumer.yaml
+```
+```
 docker build -t producer .
 ```
 ```
