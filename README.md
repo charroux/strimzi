@@ -59,6 +59,18 @@ kubectl apply -f servicemesh.yaml
 
 ## Send and receive messages
 ```
+cd consumer
+```
+```
+./gradlew build
+```
+```
+docker build -t charroux/consumer:1 .
+```
+```
+docker push charroux/consumer:1
+```
+```
 docker build -t producer .
 ```
 ```

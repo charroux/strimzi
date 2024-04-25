@@ -1,9 +1,7 @@
-package com.charroux.consumer;
+package com.charroux.producer;
 
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.apache.kafka.common.serialization.Serdes;
@@ -15,7 +13,6 @@ import java.util.Arrays;
 public class MessageReader {
 
     private static final Serde<String> STRING_SERDE = Serdes.String();
-    Logger logger = LoggerFactory.getLogger(MessageReader.class);
 
     @Autowired
     void buildPipeline(StreamsBuilder streamsBuilder) {
@@ -29,7 +26,7 @@ public class MessageReader {
                 .count();
 
         String n = wordCounts.toStream().toString();
-        logger.info("Received: " + n);
+        System.out.println("Received: " + n);
     }
 
 }

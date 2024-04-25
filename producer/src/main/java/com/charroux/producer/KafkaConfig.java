@@ -1,8 +1,6 @@
-package com.charroux.consumer;
+package com.charroux.producer;
 
 import org.apache.kafka.common.serialization.Serdes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +19,6 @@ import static org.apache.kafka.streams.StreamsConfig.*;
 @EnableKafkaStreams
 public class KafkaConfig {
 
-    Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
-
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
@@ -33,8 +29,6 @@ public class KafkaConfig {
         props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         props.put(DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-
-        logger.info("Configuration");
 
         return new KafkaStreamsConfiguration(props);
     }

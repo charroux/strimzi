@@ -1,10 +1,10 @@
-package com.charroux.consumer;
+package com.charroux.producer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConsumerApplicationTests {
+class ProducerApplicationTests {
 
 	@Test
 	void contextLoads() {
